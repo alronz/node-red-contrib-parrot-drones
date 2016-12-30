@@ -165,18 +165,35 @@ module.exports = function (RED) {
                         case 'animation-long-jump-kicker':
                         {
                             jumpingDrone.postureKicker();
-                            jumpingDrone.animationsLongJump();
+                            jumpingDrone.on("postureKicker", function () {
+                                setTimeout(function() {
+                                    jumpingDrone.stop();
+                                    jumpingDrone.animationsLongJump();
+                                }, 5000);
+                            });
+                         
                             break;
                         }
                         case 'animation-long-jump-jumper':
                         {
                             jumpingDrone.postureJumper();
-                            jumpingDrone.animationsLongJump();
+                            jumpingDrone.on("postureJumper", function () {
+                                setTimeout(function() {
+                                    jumpingDrone.stop();
+                                    jumpingDrone.animationsLongJump();
+                                }, 5000);
+                            });
                             break;
                         }
                         case 'animation-high-jump':
                         {
                             jumpingDrone.postureJumper();
+                            jumpingDrone.on("postureJumper", function () {
+                                setTimeout(function() {
+                                    jumpingDrone.stop();
+                                    jumpingDrone.animationsHighJump();
+                                }, 5000);
+                            });
                             break;
                         }
                         case 'take-picture':
