@@ -1,0 +1,49 @@
+{
+  "name": "node-red-contrib-parrot-drones",
+  "version": "1.0.0",
+  "description": "A node that can be used in Node-Red to control Parrot drones",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predev": "npm i -g",
+    "dev": "node-red -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alronz/node-red-contrib-parrot-drones.git"
+  },
+  "contributors": [
+    {
+      "name": "Bilal Al-Saeedi",
+      "email": "bilal_alsaidi@yahoo.com"
+    }
+  ],
+  "author": {
+    "name": "Bilal Al-Saeedi"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/alronz/node-red-contrib-parrot-drones/issues"
+  },
+  "homepage": "https://github.com/alronz/node-red-contrib-parrot-drones#readme",
+  "keywords": [
+    "node-red",
+    "parrot",
+    "jumping race",
+    "drone",
+    "sumo",
+    "max",
+    "night",
+    "mini drone",
+    "parrot drones"
+  ],
+  "node-red": {
+    "nodes": {
+      "Parrot Drone Config": "nodes/ParrotDroneConfig/ParrotDroneConfig.js",
+      "Parrot Drone Events": "nodes/ParrotDroneData/ParrotDroneData.js",
+      "Parrot Drone Control": "nodes/ParrotDroneControl/ParrotDroneControl.js"
+    }
+  },
+  "dependencies": {
+    "node-sumo": "git+https://github.com/alronz/node-sumo.git"
+  }
+}

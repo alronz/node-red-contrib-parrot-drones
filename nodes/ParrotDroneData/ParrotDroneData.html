@@ -1,0 +1,94 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ParrotDroneData',{
+        category: 'drone',
+        color: '#FFF0F0',
+        defaults: {
+            name: {value:"ParrotDroneData"},
+            settings: {type: "ParrotDroneConfig",required:true}
+        },
+        inputs:0,
+        outputs:1,
+        icon: "drone_icon.svg",
+        label: function() {
+            return this.name||"ParrotDroneEvents";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="ParrotDroneData">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+     <div class="form-row">
+        <label for="node-input-settings"><i class="icon-tag"></i>Settings</label>
+        <input type="text" id="node-input-settings">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ParrotDroneData">
+   <h3>Overview</h3>
+
+<p>This node is used to collect all the data returned by Parrot drone based on the Parrot <a href="http://developer.parrot.com/docs/SDK3">ARDroneSDK3</a> and by using <a href="https://github.com/alronz/node-sumo">existing nodejs library</a>.</p>
+
+<h3>Supported Parrot Drones as of now</h3>
+
+   <ul>
+        <li>Parrot Jumping Mini Drones.</li>
+    </ul>
+
+<h3>Drone Data and Events</h3>
+    <p>This node will listen to multiple events triggered by the drone and publish the data in the output <b>msg</b> object. </p>
+    <p>Below are the publish events categorized by drone type: </p>
+
+    <p><b>Jumping Mini Drones:</b></p>
+    <ul>
+    <li>'battery' - This can be three values based on the events received from the drone as explained below:
+    <ul>
+    <li>a numeric value indicating the current battery level</li>
+    <li>'critical' - Emitted when the battery is at a critically low level.</li>
+    <li>'low' - Emitted when the battery is at a low level.</li>
+    </ul>
+    </li>
+
+    <li>'status' - The status of the drone which can be <b>ready</b> </li>
+
+    <li>'posture' - The current posture of the drone, this can be 5 values based on the events received from the drone as explained below:
+    <ul>
+    <li>'standing' - Emitted when the drone changes to the standing posture. The event may be emitted slightly before the movement is complete so you may want to wait a short time before sending the drone further commands.</li>
+    <li>'jumper' - Emitted when the drone changes to the jumper posture. The event may be emitted slightly before the movement is complete so you may want to wait a short time before sending the drone further commands.</li>
+    <li>'kicker' - Emitted when the drone changes to the kicker posture. The event may be emitted slightly before the movement is complete so you may want to wait a short time before sending the drone further commands.</li>
+    <li>'stuck' - Emitted when the drone is stuck.</li>
+    <li>'unknown' - Emitted when the drone posture is unknown.</li>
+    </ul>
+    </li>
+
+    <li>'jumpLoad' - The jump loading status of the drone, this can be 6 values based on the events received from the drone as explained below:
+    <ul>
+    <li>'busy' - Emitted when the jump mechanism is busy (for example, if you tell the drone to jump while a jump is already in progress).</li>
+    <li>'unloaded' - Emitted when the jump mechanism is unloaded (for example, after a jump or kick). The event may be emitted slightly before the movement is complete so you may want to wait a short time before sending the drone further commands.</li>
+    <li>'loaded' - Emitted when the jump mechanism is retracted (for example, after a long jump while in the kicker posture). The event may be emitted slightly before the movement is complete so you may want to wait a short time before sending the drone further commands.</li>
+    <li>'unknown' - Emitted when the load state of the jump mechanism is unknown.</li>
+    <li>'unloaded and no jump due to battery Low' - Emitted when the jump mechanism is unloaded and the drone cannot perform the jump requested because the battery is low.</li>
+    <li>'loaded and no jump due to battery Low' - Emitted when the jump mechanism is unloaded and the drone cannot perform the jump requested because the battery is low.</li>
+    </ul>
+    </li>
+
+    <li>'jumpMotor' - The status of the jump motor of the drone, this can be three values based on the events received from the drone as explained below:
+    <ul>
+    <li>'ok' - Emitted when the jump motor is OK (it may have previously been blocked or overheated).</li>
+    <li>'blocked' - Emitted when the jump motor is blocked.</li>
+    <li>'overheated' - Emitted when the jump motor has overheated.</li>
+    </ul>
+    </li>
+
+    <li>'message' - A message sent from the drone, this can be two values based on the events received from the drone as explained below:
+    <ul>
+    <li>'image taken and stored internally' - Emitted when a photo is taken and stored internally (response to takePicture(opts)).</li>
+    <li>'video frame is (the video frame)' - Emits single MJPEG video frame.</li>
+    </ul>
+    </li>
+
+    </ul>
+
+</script>

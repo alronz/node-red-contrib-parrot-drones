@@ -1,0 +1,73 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ParrotDroneControl', {
+        category: 'drone',
+        color: '#FFF0F0',
+        defaults: {
+            name: {value: "ParrotDroneControl"},
+            settings: {type: "ParrotDroneConfig",required:true}
+        },
+        inputs: 1,
+        outputs: 1,
+        align: 'right',
+        icon: "drone_icon.svg",
+        label: function () {
+            return this.name || "ParrotDroneControl";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="ParrotDroneControl">
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-settings"><i class="icon-tag"></i>Settings</label>
+        <input type="text" id="node-input-settings">
+    </div>
+</script>
+
+<script type="text/x-red" data-help-name="ParrotDroneControl">
+
+<h3>Overview</h3>
+
+<p>This goal of this node is to control Parrot different drones based on Parrot <a href="http://developer.parrot.com/docs/SDK3">ARDroneSDK3</a> and by using <a href="https://github.com/alronz/node-sumo">existing nodejs library</a>. </p>
+
+<h3>Supported Parrot Drones as of now</h3>
+    <ul>
+        <li>Parrot Jumping Mini Drones.</li>
+    </ul>
+
+<h3>Commands</h3>
+    <p>The command name is expected to be inside <b>msg.command</b> and the command parameters should be inside <b>msg.payload</b>. </p>
+    <p>Below are the supported commands categorized by drone type: </p>
+
+    <p><b>Jumping Mini Drones:</b></p>
+<ul>
+<li>'forward' - Move the drone forward at the specified speed (between 0 and 100). Required input <b>msg.payload.speed</b> </li>
+<li>'backward' - Move the drone backward at the specified speed (between 0 and 100). Required input <b>msg.payload.speed</b> </li>
+<li>'right' - Turn the drone right at the specified speed (between 0 and 100).  Required input <b>msg.payload.speed</b> </li>
+<li>'left' - Turn the drone left at the specified speed (between 0 and 100).  Required input <b>msg.payload.speed</b> </li>
+<li>'stop' - Tell the drone to stop moving. </li>
+<li>'posture-kicker' - Move the drone into the kicker posture. The drone's jump mechanism is used to kick objects behind the drone.</li>
+<li>'posture-jumper' - Move the drone into the jumper posture. The drone's jump mechanism is used to propel the drone into the air. </li>
+<li>'posture-standing' - Move the drone into the standing (on head) posture. </li>
+<li>'animation-slalom' - Make the drone drive in a slalom pattern. </li>
+<li>'animation-spiral' - Make the drone drive in a spiral.</li>
+<li>'animation-spin-to-posture' - Spin and then change posture. </li>
+<li>'animation-spin-jump' - Spin and then jump the drone. </li>
+<li>'animation-ondulation' - Perform the ondulation animation. </li>
+<li>'animation-metronome' - Perform the metronome animation. </li>
+<li>'animation-slow-shake' - Shake the drone from side-to-side. </li>
+<li>'animation-tap' - Tap the drone's jump mechanism. </li>
+<li>'animation-spin' - Perform a spin. </li>
+<li>'animation-stop' - Stop the pre-programmed animation. </li>
+<li>'animation-long-jump-kicker' - Perform a long jump. The drone is in kicker posture before performing this animation. </li>
+<li>'animation-long-jump-jumper' - Perform a long jump. The drone is in jumper posture before performing this animation.  </li>
+<li>'animation-high-jump' - Perform a high jump. The drone needs to be in the jumper posture to use this API. </li>
+<li>'take-picture' - Take picture and store it internally </li>
+<li>'get-video-stream' - Emits the MJPEG video stream. This will send the data representing the video as a stream of buffer data</li>
+</ul>
+
+
+</script>
