@@ -1,26 +1,43 @@
-function JumpingDroneClient(settings, node) {
+var instance;
+
+JumpingDroneClient.getInstance = function (settings, node) {
+    if (!instance) {
+        instance = new JumpingDroneClient(settings, node);
+    }
+
+    return instance;
+};
+
+function JumpingDroneClient(settings) {
     var opts = {};
+    var self = this;
     opts.ip = settings.ip;
     var jumpingDrone = require('node-sumo').createClient(opts);
 
     var jumpingDroneReady = false;
 
+
     this.connect = function (callback) {
         jumpingDrone.connect(function () {
-            jumpingDroneReady = true;
-            
-            if (typeof callback === "function") {
-                callback();
-            }
+            jumpingDrone.on("ready", function () {
+                jumpingDroneReady = true;
+
+                if (typeof callback === "function") {
+                    callback();
+                }
+            });
         });
     };
 
+    this.isReady = function () {
+        return jumpingDroneReady;
+    };
 
-    this.handleDroneCommands = function (msg) {
+    this.handleDroneCommands = function (msg, node) {
         var command = msg.command;
 
         if (command) {
-            if (jumpingDroneReady) {
+            if (self.isReady()) {
                 switch (command) {
                     case 'forward':
                     {
@@ -187,16 +204,13 @@ function JumpingDroneClient(settings, node) {
                 }
             } else {
                 node.error("Jumping drone still not connected");
-                jumpingDrone.connect(function () {
-                    jumpingDroneReady = true;
-                });
             }
         } else {
             node.error("msg.command isn't defined");
         }
-    }
+    };
 
-    this.handleDroneData = function () {
+    this.handleDroneData = function (node) {
 
         jumpingDrone.on("battery", function (battery) {
             node.send({"battery": battery});

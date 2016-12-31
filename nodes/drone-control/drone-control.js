@@ -9,12 +9,28 @@ module.exports = function (RED) {
         }
 
         var JumpingDroneClient = require('../drone-clients/JumpingDroneClient');
-        var jumpingDroneClient = new JumpingDroneClient(settings, node);
+        var jumpingDroneClient = JumpingDroneClient.getInstance(settings);
 
         switch (settings.droneType) {
             case 'Jumping Drone':
             {
-                jumpingDroneClient.connect();
+                node.status({fill: "red", shape: "ring", text: "disconnected"});
+
+                if (!jumpingDroneClient.isReady()) {
+                    jumpingDroneClient.connect(function () {
+                        node.on('input', function (msg) {
+                            jumpingDroneClient.handleDroneCommands(msg, node);
+                        });
+                        node.status({fill: "green", shape: "dot", text: "connected"});
+                    });
+                } else {
+                    node.status({fill: "green", shape: "dot", text: "connected"});
+                    node.on('input', function (msg) {
+                        jumpingDroneClient.handleDroneCommands(msg, node);
+                    });
+                }
+
+
                 break;
             }
             default:
@@ -23,23 +39,6 @@ module.exports = function (RED) {
                 break;
             }
         }
-
-
-        node.on('input', function (msg) {
-
-            switch (settings.droneType) {
-                case 'Jumping Drone':
-                {
-                    jumpingDroneClient.handleDroneCommands(msg);
-                    break;
-                }
-                default:
-                {
-                    node.error("settings.type isn't defined");
-                    break;
-                }
-            }
-        });
 
         node.on('close', function () {
         });

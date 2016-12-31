@@ -1,4 +1,3 @@
-
 module.exports = function (RED) {
 
 
@@ -11,14 +10,21 @@ module.exports = function (RED) {
         }
 
         var JumpingDroneClient = require('../drone-clients/JumpingDroneClient');
-        var jumpingDroneClient = new JumpingDroneClient(settings, node);
+        var jumpingDroneClient = new JumpingDroneClient(settings);
 
         switch (settings.droneType) {
             case 'Jumping Drone':
             {
-                jumpingDroneClient.connect(function(){
-                    jumpingDroneClient.handleDroneData();
-                });
+                node.status({fill: "red", shape: "ring", text: "disconnected"});
+                if (!jumpingDroneClient.isReady()) {
+                    jumpingDroneClient.connect(function () {
+                        jumpingDroneClient.handleDroneData(node);
+                        node.status({fill: "green", shape: "dot", text: "connected"});
+                    });
+                } else {
+                    node.status({fill: "green", shape: "dot", text: "connected"});
+                    jumpingDroneClient.handleDroneData(node);
+                }
                 break;
             }
             default:
