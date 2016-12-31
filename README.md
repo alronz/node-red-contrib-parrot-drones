@@ -56,11 +56,13 @@ Below are the publish events categorized by drone type:
 <b>battery</b> 
 
  This can be three values based on the events received from the drone as explained below:
+
 - a numeric value indicating the current battery level 
 - 'critical' - Emitted when the battery is at a critically low level. 
 - 'low' - Emitted when the battery is at a low level. 
 
- <b>status</b> 
+
+<b>status</b> 
  
 The status of the drone which can be 'ready'  
 
