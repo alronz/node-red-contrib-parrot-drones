@@ -5,7 +5,9 @@
             type: {value: "JumpingDrone", required: true},
             ip: {value: "192.168.2.1"}
         },
-        label: "Parrot Drone Configs"
+        label: function() {
+        return this.ip;
+    }
     });
 </script>
 
