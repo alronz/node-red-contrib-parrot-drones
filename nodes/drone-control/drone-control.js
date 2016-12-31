@@ -1,6 +1,6 @@
 module.exports = function (RED) {
 
-    function ParrotDroneControl(config) {
+    function Constructor(config) {
         RED.nodes.createNode(this, config);
         var node = this;
         var settings = RED.nodes.getNode(config.settings);
@@ -8,11 +8,11 @@ module.exports = function (RED) {
             node.error("settings aren't defined");
         }
 
-        var JumpingDroneClient = require('../DroneClients/JumpingDroneClient');
+        var JumpingDroneClient = require('../drone-clients/JumpingDroneClient');
         var jumpingDroneClient = new JumpingDroneClient(settings, node);
 
-        switch (settings.type) {
-            case 'JumpingDrone':
+        switch (settings.droneType) {
+            case 'Jumping Drone':
             {
                 jumpingDroneClient.connect();
                 break;
@@ -27,8 +27,8 @@ module.exports = function (RED) {
 
         node.on('input', function (msg) {
 
-            switch (settings.type) {
-                case 'JumpingDrone':
+            switch (settings.droneType) {
+                case 'Jumping Drone':
                 {
                     jumpingDroneClient.handleDroneCommands(msg);
                     break;
@@ -46,5 +46,5 @@ module.exports = function (RED) {
 
     }
 
-    RED.nodes.registerType("ParrotDroneControl", ParrotDroneControl);
+    RED.nodes.registerType("drone-control", Constructor);
 };

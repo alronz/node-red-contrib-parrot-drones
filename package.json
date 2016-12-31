@@ -38,9 +38,9 @@
   ],
   "node-red": {
     "nodes": {
-      "Parrot Drone Config": "nodes/ParrotDroneConfig/ParrotDroneConfig.js",
-      "Parrot Drone Events": "nodes/ParrotDroneData/ParrotDroneData.js",
-      "Parrot Drone Control": "nodes/ParrotDroneControl/ParrotDroneControl.js"
+      "Drone Config": "nodes/drone-config/drone-config.js",
+      "Drone Data": "nodes/drone-data/drone-data.js",
+      "Drone Control": "nodes/drone-control/drone-control.js"
     }
   },
   "dependencies": {

@@ -1,22 +1,22 @@
 <script type="text/javascript">
-    RED.nodes.registerType('ParrotDroneControl', {
+    RED.nodes.registerType('drone-control', {
         category: 'drone',
         color: '#FFF0F0',
         defaults: {
-            name: {value: "ParrotDroneControl"},
-            settings: {type: "ParrotDroneConfig",required:true}
+            name: {value: "Drone Control"},
+            settings: {value:"", type: "drone-config",required:true}
         },
         inputs: 1,
         outputs: 1,
         align: 'right',
         icon: "drone_icon.svg",
         label: function () {
-            return this.name || "ParrotDroneControl";
+            return this.name || "Drone Control";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="ParrotDroneControl">
+<script type="text/x-red" data-template-name="drone-control">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -27,7 +27,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="ParrotDroneControl">
+<script type="text/x-red" data-help-name="drone-control">
 
 <h3>Overview</h3>
 

@@ -1,21 +1,21 @@
 <script type="text/javascript">
-    RED.nodes.registerType('ParrotDroneData',{
+    RED.nodes.registerType('drone-data',{
         category: 'drone',
         color: '#FFF0F0',
         defaults: {
-            name: {value:"ParrotDroneData"},
-            settings: {type: "ParrotDroneConfig",required:true}
+            name: {value:"Drone Data"},
+            settings: {value:"", type: "drone-config",required:true}
         },
         inputs:0,
         outputs:1,
         icon: "drone_icon.svg",
         label: function() {
-            return this.name||"ParrotDroneEvents";
+            return this.name||"Drone Data";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="ParrotDroneData">
+<script type="text/x-red" data-template-name="drone-data">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -26,7 +26,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="ParrotDroneData">
+<script type="text/x-red" data-help-name="drone-data">
    <h3>Overview</h3>
 
 <p>This node is used to collect all the data returned by Parrot drone based on the Parrot <a href="http://developer.parrot.com/docs/SDK3">ARDroneSDK3</a> and by using <a href="https://github.com/alronz/node-sumo">existing nodejs library</a>.</p>
