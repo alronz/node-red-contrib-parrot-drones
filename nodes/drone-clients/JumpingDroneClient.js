@@ -233,84 +233,164 @@ function JumpingDroneClient(settings) {
     this.handleDroneData = function (node) {
 
         jumpingDrone.on("battery", function (battery) {
-            node.send({"batteryPercentage": battery});
+            var object = {};
+            object.topic = "batteryPercentage";
+            object.payload = {};
+            object.payload.batteryPercentage = battery;
+            node.send(object);
         });
 
         jumpingDrone.on("batteryCritical", function () {
-            node.send({"batteryStatus": "critical"});
+            var object = {};
+            object.topic = "batteryStatus";
+            object.payload = {};
+            object.payload.batteryStatus = "critical";
+            node.send(object);
         });
 
         jumpingDrone.on("batteryLow", function () {
-            node.send({"batteryStatus": "low"});
+            var object = {};
+            object.topic = "batteryStatus";
+            object.payload = {};
+            object.payload.batteryStatus = "low";
+            node.send(object);
         });
 
 
         jumpingDrone.on("ready", function () {
-            node.send({"status": "ready"});
+            var object = {};
+            object.topic = "status";
+            object.payload = {};
+            object.payload.status = "ready";
+            node.send(object);
         });
 
         jumpingDrone.on("postureStanding", function () {
-            node.send({"posture": "standing"});
+            var object = {};
+            object.topic = "posture";
+            object.payload = {};
+            object.payload.posture = "standing";
+            node.send(object);
         });
 
         jumpingDrone.on("postureJumper", function () {
-            node.send({"posture": "jumper"});
+            var object = {};
+            object.topic = "posture";
+            object.payload = {};
+            object.payload.posture = "jumper";
+            node.send(object);
         });
 
         jumpingDrone.on("postureKicker", function () {
-            node.send({"posture": "kicker"});
+            var object = {};
+            object.topic = "posture";
+            object.payload = {};
+            object.payload.posture = "kicker";
+            node.send(object);
         });
 
         jumpingDrone.on("postureStuck", function () {
-            node.send({"posture": "stuck"});
+            var object = {};
+            object.topic = "posture";
+            object.payload = {};
+            object.payload.posture = "stuck";
+            node.send(object);
         });
 
         jumpingDrone.on("postureUnknown", function () {
-            node.send({"posture": "unknown"});
+            var object = {};
+            object.topic = "posture";
+            object.payload = {};
+            object.payload.posture = "unknown";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpLoadUnknown", function () {
-            node.send({"jumpLoad": "unknown"});
+            var object = {};
+            object.topic = "jumpLoad";
+            object.payload = {};
+            object.payload.jumpLoad = "unknown";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpLoadUnloaded", function () {
-            node.send({"jumpLoad": "unloaded"});
+            var object = {};
+            object.topic = "jumpLoad";
+            object.payload = {};
+            object.payload.jumpLoad = "unloaded";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpLoadLoaded", function () {
-            node.send({"jumpLoad": "loaded"});
+            var object = {};
+            object.topic = "jumpLoad";
+            object.payload = {};
+            object.payload.jumpLoad = "loaded";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpLoadBusy", function () {
-            node.send({"jumpLoad": "busy"});
+            var object = {};
+            object.topic = "jumpLoad";
+            object.payload = {};
+            object.payload.jumpLoad = "busy";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpLoadLowBatteryUnloaded", function () {
-            node.send({"jumpLoad": "unloaded and no jump due to battery Low"});
+            var object = {};
+            object.topic = "jumpLoad";
+            object.payload = {};
+            object.payload.jumpLoad = "unloaded and no jump due to battery Low";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpLoadLowBatteryLoaded", function () {
-            node.send({"jumpLoad": "loaded and no jump due to battery Low"});
+            var object = {};
+            object.topic = "jumpLoad";
+            object.payload = {};
+            object.payload.jumpLoad = "loaded and no jump due to battery Low";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpMotorOK", function () {
-            node.send({"jumpMotor": "ok"});
+            var object = {};
+            object.topic = "jumpMotor";
+            object.payload = {};
+            object.payload.jumpMotor = "ok";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpMotorErrorBlocked", function () {
-            node.send({"jumpMotor": "blocked"});
+            var object = {};
+            object.topic = "jumpMotor";
+            object.payload = {};
+            object.payload.jumpMotor = "blocked";
+            node.send(object);
         });
 
         jumpingDrone.on("jumpMotorErrorOverheated", function () {
-            node.send({"jumpMotor": "overheated"});
+            var object = {};
+            object.topic = "jumpMotor";
+            object.payload = {};
+            object.payload.jumpMotor = "overheated";
+            node.send(object);
         });
 
         jumpingDrone.on("internalPicture", function () {
-            node.send({"message": "image taken and stored internally"});
+            var object = {};
+            object.topic = "message";
+            object.payload = {};
+            object.payload.message = "image taken and stored internally";
+            node.send(object);
         });
 
         jumpingDrone.on("video", function (videoFrame) {
-            node.send({"message": "video frame is: " + videoFrame});
+            var object = {};
+            object.topic = "message";
+            object.payload = {};
+            object.payload.message = "video frame is: " + videoFrame;
+            node.send(object);
         });
     }
 }
