@@ -233,15 +233,15 @@ function JumpingDroneClient(settings) {
     this.handleDroneData = function (node) {
 
         jumpingDrone.on("battery", function (battery) {
-            node.send({"battery": battery});
+            node.send({"batteryPercentage": battery});
         });
 
         jumpingDrone.on("batteryCritical", function () {
-            node.send({"battery": "critical"});
+            node.send({"batteryStatus": "critical"});
         });
 
         jumpingDrone.on("batteryLow", function () {
-            node.send({"battery": "low"});
+            node.send({"batteryStatus": "low"});
         });
 
 

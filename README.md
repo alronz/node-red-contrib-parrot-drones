@@ -54,11 +54,14 @@ Below are the publish events categorized by drone type:
 
 <h4> Jumping Mini Drones:</h4>
      
-<b>battery</b> 
+<b>batteryPercentage</b> 
 
- This can be three values based on the events received from the drone as explained below:
+A numeric value indicating the current battery level 
 
-- a numeric value indicating the current battery level 
+<b>batteryStatus</b> 
+
+This can be two values based on the events received from the drone as explained below:
+
 - 'critical' - Emitted when the battery is at a critically low level. 
 - 'low' - Emitted when the battery is at a low level. 
 
