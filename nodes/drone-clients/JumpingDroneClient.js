@@ -15,22 +15,42 @@ function JumpingDroneClient(settings) {
     var jumpingDrone = require('node-sumo').createClient(opts);
 
     var jumpingDroneReady = false;
+    var connectionInProgress = false;
 
 
     this.connect = function (callback) {
-        jumpingDrone.connect(function () {
-            jumpingDrone.on("ready", function () {
-                jumpingDroneReady = true;
-
+        connectionInProgress = true;
+        jumpingDrone.connect(function (err) {
+            if (err) {
                 if (typeof callback === "function") {
-                    callback();
+                    callback(err);
                 }
-            });
+                connectionInProgress = false;
+            } else {
+                jumpingDrone.on("ready", function () {
+                    jumpingDroneReady = true;
+                    connectionInProgress = false;
+
+                    if (typeof callback === "function") {
+                        callback();
+                    }
+                });
+            }
         });
+    };
+
+    this.disconnect = function () {
+        jumpingDroneReady = false;
+        connectionInProgress = false;
+        jumpingDrone.disconnect();
     };
 
     this.isReady = function () {
         return jumpingDroneReady;
+    };
+
+    this.isConnectionInProgress = function () {
+        return connectionInProgress;
     };
 
     this.handleDroneCommands = function (msg, node) {

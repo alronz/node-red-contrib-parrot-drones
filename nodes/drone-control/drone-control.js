@@ -1,6 +1,6 @@
 module.exports = function (RED) {
 
-    function Constructor(config) {
+    function DroneControl(config) {
         RED.nodes.createNode(this, config);
         var node = this;
         var settings = RED.nodes.getNode(config.settings);
@@ -8,42 +8,20 @@ module.exports = function (RED) {
             node.error("settings aren't defined");
         }
 
-        var JumpingDroneClient = require('../drone-clients/JumpingDroneClient');
-        var jumpingDroneClient = JumpingDroneClient.getInstance(settings);
+        node.status({fill: "red", shape: "ring", text: "disconnected"});
+        settings.register(node);
 
-        switch (settings.droneType) {
-            case 'Jumping Drone':
-            {
-                node.status({fill: "red", shape: "ring", text: "disconnected"});
-
-                if (!jumpingDroneClient.isReady()) {
-                    jumpingDroneClient.connect(function () {
-                        node.on('input', function (msg) {
-                            jumpingDroneClient.handleDroneCommands(msg, node);
-                        });
-                        node.status({fill: "green", shape: "dot", text: "connected"});
-                    });
-                } else {
-                    node.status({fill: "green", shape: "dot", text: "connected"});
-                    node.on('input', function (msg) {
-                        jumpingDroneClient.handleDroneCommands(msg, node);
-                    });
-                }
-
-
-                break;
-            }
-            default:
-            {
-                node.error("settings.type isn't defined");
-                break;
-            }
-        }
-
-        node.on('close', function () {
+        settings.eventEmitter.on('isReady', function () {
+            node.status({fill: "green", shape: "dot", text: "connected"});
+            node.on('input', function (msg) {
+                settings.handleDroneCommands(msg, node);
+            });
         });
 
+        node.on('close', function () {
+            settings.deregister(node);
+        });
     }
 
-    RED.nodes.registerType("drone-control", Constructor);
+    RED.nodes.registerType("drone-control", DroneControl);
 };

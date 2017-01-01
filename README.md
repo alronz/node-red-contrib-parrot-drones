@@ -8,6 +8,7 @@
 - ParrotDroneControl: is a node that can be used to perform many drone commands and might produce output in response to the commands.
 
 Additionally a configuration node 'ParrotDroneConfig' has been created to have all the drone related settings and is accessible by the other nodes.
+All the commands and events are tested with real drone to verify that it works as expected.
 
 <h3>Supported Parrot Drones as of now</h3>
   - Parrot Jumping Mini Drones.
