@@ -45,7 +45,7 @@ All the commands and events are tested with real drone to verify that it works a
 - 'animation-long-jump-jumper' - Perform a long jump. The drone is in jumper posture before performing this animation.   
 - 'animation-high-jump' - Perform a high jump. The drone needs to be in the jumper posture to use this API.  
 - 'take-picture' - Take picture and store it internally  
-- 'get-video-stream' - Emits the MJPEG video stream. This will send the data representing the video as a stream of buffer data 
+- 'get-video-stream' - Emits the MJPEG video stream. This will send the data representing the video as a stream of buffer data in <b>object.payload.video</b>
 </ul>
 
 <h3>Drone Data and Events</h3>

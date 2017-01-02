@@ -16,6 +16,7 @@ function JumpingDroneClient(settings) {
 
     var jumpingDroneReady = false;
     var connectionInProgress = false;
+    var videoStream = jumpingDrone.getVideoStream();
 
 
     this.connect = function (callback) {
@@ -30,7 +31,8 @@ function JumpingDroneClient(settings) {
                 jumpingDrone.on("ready", function () {
                     jumpingDroneReady = true;
                     connectionInProgress = false;
-
+                    jumpingDrone.forward(10);
+                    jumpingDrone.videoStreaming();
                     if (typeof callback === "function") {
                         callback();
                     }
@@ -210,9 +212,12 @@ function JumpingDroneClient(settings) {
                     }
                     case 'get-video-stream':
                     {
-                        var video = jumpingDrone.getVideoStream();
-                        video.on("data", function (data) {
-                            node.send(data);
+                        videoStream.on("data", function (data) {
+                            var object = {};
+                            node.log("frame received");
+                            object.payload = {};
+                            object.payload.video = data;
+                            node.send(object);
                         });
                         break;
                     }
@@ -387,9 +392,11 @@ function JumpingDroneClient(settings) {
 
         jumpingDrone.on("video", function (videoFrame) {
             var object = {};
+            node.log("frame received");
             object.topic = "message";
             object.payload = {};
-            object.payload.message = "video frame is: " + videoFrame;
+            object.payload.message = "video frame received.";
+            object.payload.buf = videoFrame;
             node.send(object);
         });
     }
