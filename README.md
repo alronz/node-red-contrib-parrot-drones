@@ -1,13 +1,13 @@
 
 <h3>Overview</h3>
 
-<p>This project aims to provide a Node in Node-Red that can be used to control Parrot different drones based on Parrot <a href="http://developer.parrot.com/docs/SDK3">ARDroneSDK3</a> and by using <a href="https://github.com/alronz/node-sumo">existing nodejs library</a>. </p>
+<p>This project aims to provide a Nodes in Node-Red that can be used to control and monitor the data of Parrot drones based on Parrot <a href="http://developer.parrot.com/docs/SDK3">ARDroneSDK3</a>. </p>
 
-<p>This project contains two nodes as explained below:</p>
-- ParrotDroneData: is an output node that can be used to read all the data received from the drone such as battery, status, etc ..
-- ParrotDroneControl: is a node that can be used to perform many drone commands and might produce output in response to the commands.
+<p>Two nodes is provided as explained below:</p>
+- drone-data: is an output node that can be used to read all the data received from the drone such as battery, status, etc ..
+- drone-control: used to execute drone supported commands.
 
-Additionally a configuration node 'ParrotDroneConfig' has been created to have all the drone related settings and is accessible by the other nodes.
+Additionally a configuration node 'drone-config' is provided to group all the drone related settings and is accessible by the other nodes.
 All the commands and events are tested with real drone to verify that it works as expected.
 
 <h3>Supported Parrot Drones as of now</h3>
@@ -19,7 +19,7 @@ All the commands and events are tested with real drone to verify that it works a
 
 
 <h3>Commands</h3>
-   The command name is expected to be inside <b>msg.command</b> and the command parameters should be inside <b>msg.payload</b>. 
+   The commands sent to the "drone-control" node is expected to be inside <b>msg.command</b> and the command parameters should be inside <b>msg.payload</b>. 
    Below are the supported commands categorized by drone type:
 
 <h4>Jumping Mini Drones </h4>
@@ -49,7 +49,7 @@ All the commands and events are tested with real drone to verify that it works a
 </ul>
 
 <h3>Drone Data and Events</h3>
-This node will listen to multiple events triggered by the drone and publish the data in the output <b>msg</b> object. 
+This node will listen to multiple events triggered by the drone and publish the data to <b>msg.payload</b> object. 
 Below are the publish events categorized by drone type: 
 
 <h4> Jumping Mini Drones:</h4>
