@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-parrot-drones",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A node that can be used in Node-Red to control Parrot drones",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
