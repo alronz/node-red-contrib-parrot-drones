@@ -11,7 +11,7 @@ Additionally a configuration node 'drone-config' is provided to group all the dr
 All the commands and events are tested with real drone to verify that it works as expected.
 
 <h3>Supported Parrot Drones as of now</h3>
-  - Parrot Jumping Mini Drones.
+  - Parrot Jumping Mini Drones <a href="https://github.com/alronz/node-sumo">using existing node library</a>.
   
 <h3> Install</h3>
   
