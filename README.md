@@ -14,19 +14,19 @@ All the commands and events are tested with real drone to verify that it works a
 
 ### Supported Parrot Drones as of now
 
-* Parrot Jumping Mini Drones <a href="https://github.com/alronz/node-sumo">using existing node library</a>.
+1. Parrot Jumping Mini Drones <a href="https://github.com/alronz/node-sumo">using existing node library</a>.
   
 ### Install
   
   ```npm i node-red-contrib-parrot-drones```
 
 
-### Commands<
+### Commands
 
 The commands sent to the "drone-control" node is expected to be inside **msg.command** and the command parameters should be inside **msg.payload**. 
 Below are the supported commands categorized by drone type:
 
-#### Jumping Mini Drones
+1. Jumping Mini Drones
 
 * ```forward``` 
 Move the drone forward at the specified speed (between 0 and 100). Required input **msg.payload.speed**
@@ -81,7 +81,7 @@ Emits the MJPEG video stream. This will send the data representing the video as 
 This node will listen to multiple events triggered by the drone and publish the data to **msg.payload** object. 
 Below are the publish events categorized by drone type: 
 
-#### Jumping Mini Drones
+1. Jumping Mini Drones
      
 **batteryPercentage** 
 
